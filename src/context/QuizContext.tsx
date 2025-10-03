@@ -1,18 +1,18 @@
-// QuizContext.tsx
+
 import React, { createContext, useReducer, useContext } from "react";
 import type { Question } from "../types/quiz";
 import type { State } from "../types/quizState";
 
 export const initialState: State = {
-  view: "topic", // start on topic selection screen
-  topic: null, // no topic selected yet
-  questions: [], // no questions loaded
-  answers: {}, // no answers yet
-  currentIndex: 0, // start at question 0
-  score: 0, // score is 0
-  feedback: null, // feedback from OpenAI not generated yet
-  loading: false, // not loading at start
-  error: null, // no error
+  view: "topic", 
+  topic: null,
+  questions: [],
+  answers: {}, 
+  currentIndex: 0,
+  score: 0,
+  feedback: null, 
+  loading: false, 
+  error: null, 
 };
 
 type Action =
