@@ -18,19 +18,25 @@ const ResultsScreen: React.FC<Props> = ({ score, totalQuestions, topic }) => {
   const { state, dispatch } = useQuiz();
   const [feedback, setFeedback] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  useEffect(() => {
-    const fetchFeedback = async () => {
+useEffect(() => {
+  const fetchFeedback = async () => {
+    // ✅ only fetch if no feedback exists
+    if (!feedback) {
       setIsLoading(true);
-      const generated = await generateCustomFeedback(score, totalQuestions, topic);
-      dispatch({ type: "SET_FEEDBACK", payload: generated });
-      setFeedback(generated);
-      setIsLoading(false);
-    };
+      try {
+        const generated = await generateCustomFeedback(score, totalQuestions, topic);
+        dispatch({ type: "SET_FEEDBACK", payload: generated });
+        setFeedback(generated);
+      } catch (err) {
+        console.error("Error generating feedback:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
 
-    fetchFeedback();
-  }, [score, totalQuestions, topic, dispatch]);
-
+  fetchFeedback();
+}, [score, totalQuestions, topic, dispatch, feedback]);
   // ✅ Generate PDF report
 const handleDownloadReport = () => {
   const currentDate = new Date().toLocaleString();
