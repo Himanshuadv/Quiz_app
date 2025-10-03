@@ -10,14 +10,17 @@ import { generateQuizQuestions } from "../service/geminiAiService";
 
 
 const TopicSelectionScreen: React.FC = () => {
-  const { dispatch } = useQuiz();
+  const { state,dispatch } = useQuiz();
   const [isloading, setIsLoading] = useState(false)
+  const [loadingTopic, setLoadingTopic] = useState<string | null>(null);
+
 
   const handleSelect = async (topic: string) => {
   try {
     console.log("Fetching questions for", topic);
     // dispatch({type: "START_LOADING", topic})
     setIsLoading(true)
+    setLoadingTopic(topic);
     const questions = await generateQuizQuestions(topic); // fetchMCQs should accept topic param
     console.log("Fetched questions:", questions);
 
@@ -45,7 +48,7 @@ const TopicSelectionScreen: React.FC = () => {
       <h1 className="text-4xl sm:text-5xl font-extrabold mb-8 uppercase text-center">
         AI-POWERED <br /> KNOWLEDGE QUIZ
       </h1>
-       {isloading && <LoadingScreen topic={"Loading result"} />}
+       {isloading && <LoadingScreen topic={loadingTopic}/>}
      {!isloading && <> <div className="flex flex-col sm:flex-row gap-6 justify-center my-10">
         <TopicButton topic="Wellness" icon={Brain} color="wellness" onClick={handleSelect} />
         <TopicButton topic="Tech Trends" icon={Sparkles} color="tech" onClick={handleSelect} />

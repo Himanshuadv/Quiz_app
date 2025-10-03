@@ -4,14 +4,6 @@
 const apiKey = import.meta.env.VITE_API_KEY as string;
 import { fetchMCQs } from "./openAiService";
 
-// MANDATORY: Firebase Configuration (Required for all canvas apps)
-// Although this app doesn't use Firestore yet, the setup is mandatory.
-// const appId = typeof __app_id !== 'undefined' ? __app_id : 'gemini-quiz-app';
-// const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
-// const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-// const apiKey = ; // API key is provided by the environment
-
-// Define the required interface structure for the application
 const QUESTION_SCHEMA = {
     type: "ARRAY",
     items: {
@@ -23,9 +15,10 @@ const QUESTION_SCHEMA = {
                 items: { type: "STRING" }
             },
             correctAnswer: { type: "STRING" },
+            description:{type:"STRING"}
         },
-        required: ["question", "options", "correctAnswer"],
-        propertyOrdering: ["question", "options", "correctAnswer"],
+        required: ["question", "options", "correctAnswer","description"],
+        propertyOrdering: ["question", "options", "correctAnswer","description"],
     }
 };
 
@@ -49,8 +42,7 @@ const API_URL = `${GEMINI_URL}/${GEMINI_MODEL}:generateContent?key=${apiKey}`;
  * @returns {Promise<Array<{question: string, options: string[], correctAnswer: string}>>}
  */
 export const generateQuizQuestions = async (topic, amount = 5) => {
-    const userPrompt = `Generate exactly ${amount} unique, interesting, and challenging multiple-choice questions about the topic: "${topic}". Ensure each question has 4 distinct options and one clearly marked correct answer.`;
-    console.log(apiKey);
+    const userPrompt = `Generate exactly ${amount} unique, interesting, and challenging multiple-choice questions about the topic: "${topic}". Ensure each question has 4 distinct options and one clearly marked correct answer with description about the answer (i.e.concise justification about the answer).`;
     
     const systemPrompt = "You are a quiz question generator. Your task is to generate high-quality multiple-choice questions. The output MUST be a JSON array that strictly follows the provided schema. Do not include any explanation or extra text outside the JSON block.";
 

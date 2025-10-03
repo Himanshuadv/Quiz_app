@@ -23,7 +23,9 @@ type Action =
   | { type: "SET_FEEDBACK"; feedback: string }
   | { type: "RESET" }
   | { type: "NEXT_QUESTION" }
-  | { type: "PREV_QUESTION" };
+  | { type: "PREV_QUESTION" }
+  | { type: "SET_TOPIC"; topic: string }
+  | {type: "SET_VIEW"; view: string}
 
 const QuizContext = createContext<any>(null);
 
@@ -59,8 +61,10 @@ const reducer = (state: State, action: Action): State => {
     }
     case "FINISH_QUIZ":
       return { ...state, view: "results" };
+    case "SET_TOPIC":
+        return {...state, topic:action.topic};
     case "SET_FEEDBACK":
-      return { ...state, feedback: action.feedback,loading: false,view: "results" };
+      return { ...state, feedback: action.feedback,loading: false,view: "results",currentIndex:0 };
     case "RESET":
       return initialState;
     case "NEXT_QUESTION":
@@ -68,6 +72,8 @@ const reducer = (state: State, action: Action): State => {
 
     case "PREV_QUESTION":
       return { ...state, currentIndex: state.currentIndex - 1 };
+    case "SET_VIEW":
+      return {...state, view:action.view}
     default:
       return state;
   }

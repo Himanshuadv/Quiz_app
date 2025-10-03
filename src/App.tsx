@@ -2,6 +2,7 @@
 import React , {useEffect} from "react";
 import { useQuiz } from "./context/QuizContext";
 import {fetchMCQs } from './service/openAiService'
+import AnalysisScreen from "./components/AnalysisScreen";
 
 import Layout from "./components/Layout";
 import TopicSelectionScreen from "./components/TopicSelectionScreen";
@@ -29,9 +30,10 @@ const App: React.FC = () => {
           score={state.score}
           totalQuestions={state.questions.length}
           topic={state.topic!}
-          feedback={state.feedback}
+          // feedback={state.feedback}
         />
       )}
+      {state.view === "analysis" && <AnalysisScreen />}
     </Layout>
   );
 };

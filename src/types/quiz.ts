@@ -11,4 +11,4 @@ export type UserAnswers = Record<number, string | null>;
 
 export type QuizData = Record<string, Question[]>;
 
-export type View = 'topic' | 'loading_quiz' | 'quiz' | 'results';
+export type View = 'topic' | 'loading_quiz' | 'quiz' | 'results'|'analysis';

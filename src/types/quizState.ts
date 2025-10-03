@@ -4,7 +4,7 @@ import type { UserAnswers } from "./quiz";
 import {type Question} from "./quiz"
 
 export type State = {
-  view: "topic" | "loading" | "quiz" | "results";
+  view: "topic" | "loading" | "quiz" | "results"|"analysis";
   topic: string | null;
   questions: Question[];
   answers: UserAnswers;
