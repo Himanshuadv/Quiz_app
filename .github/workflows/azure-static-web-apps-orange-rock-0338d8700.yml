@@ -38,6 +38,10 @@ jobs:
           app_location: "/"
           api_location: ""
           output_location: "dist"
+        env:
+           VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
+           VITE_GEMINI_MODEL: ${{ secrets.VITE_GEMINI_MODEL }}
+           VITE_GEMINI_URL: ${{ secrets.VITE_GEMINI_URL }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
@@ -48,3 +52,4 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ORANGE_ROCK_0338D8700 }}
           action: "close"
+
