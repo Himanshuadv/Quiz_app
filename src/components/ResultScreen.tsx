@@ -5,7 +5,7 @@ import LoadingScreen from "./LoadingScreen";
 import { generateCustomFeedback } from "../service/geminiAiService";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable"; // for nice tables
-import { generatePDF, type QuizMeta } from "../service/generatepdf";
+import { generatePDF, type QuizMeta } from "../service/generatePdf.ts";
 
 
 type Props = {
