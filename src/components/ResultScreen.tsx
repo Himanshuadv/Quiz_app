@@ -73,21 +73,21 @@ const ResultsScreen: React.FC<Props> = ({ score, totalQuestions, topic }) => {
           <div className="flex gap-4 justify-center mt-6">
             <button
               onClick={() => dispatch({ type: "RESET" })}
-              className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-2xl shadow-lg transition"
+              className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-2xl shadow-lg transition cursor-pointer"
             >
               Reset
             </button>
 
             <button
               onClick={handleDownloadReport}
-              className="px-6 py-3 bg-cyan-600 hover:bg-cyan-700 text-white rounded-2xl shadow-lg transition"
+              className="px-6 py-3 bg-cyan-600 hover:bg-cyan-700 text-white rounded-2xl shadow-lg transition cursor-pointer"
             >
               Download Report
             </button>
 
             <button
               onClick={() => dispatch({ type: "SET_VIEW", view: "analysis" })}
-              className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-2xl shadow-lg transition"
+              className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-2xl shadow-lg transition cursor-pointer"
             >
               Review Answers
             </button>
