@@ -25,7 +25,7 @@ type Action =
   | { type: "NEXT_QUESTION" }
   | { type: "PREV_QUESTION" }
   | { type: "SET_TOPIC"; topic: string }
-  | {type: "SET_VIEW"; view: string}
+  | {type: "SET_VIEW"; view: string,feedback:string}
 
 const QuizContext = createContext<any>(null);
 
@@ -73,7 +73,7 @@ const reducer = (state: State, action: Action): State => {
     case "PREV_QUESTION":
       return { ...state, currentIndex: state.currentIndex - 1 };
     case "SET_VIEW":
-      return {...state, view:action.view}
+      return {...state,feedback:action.feedback, view:action.view }
     default:
       return state;
   }

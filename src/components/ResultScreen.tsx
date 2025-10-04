@@ -19,10 +19,12 @@ const ResultsScreen: React.FC<Props> = ({ score, totalQuestions, topic }) => {
 useEffect(() => {
   const fetchFeedback = async () => {
     // ✅ only fetch if no feedback exists
+    console.log(feedback);
+    
     if (!feedback) {
       setIsLoading(true);
       try {
-        const generated = await generateCustomFeedback(score, totalQuestions, topic);
+        const generated = await generateCustomFeedback(score, totalQuestions, topic,state.questions);
         dispatch({ type: "SET_FEEDBACK", payload: generated });
         setFeedback(generated);
       } catch (err) {

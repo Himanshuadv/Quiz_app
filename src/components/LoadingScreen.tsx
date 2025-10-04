@@ -7,7 +7,7 @@ type Props = {
 const LoadingScreen: React.FC<Props> = ({ topic }) => {
   const messages = [
     `AI is crafting 5 unique questions on `,
-    `AI is Still brainstorming tricky oes about `,
+    `AI is Still brainstorming tricky about `,
     `AI is Making sure the  quiz is challengin`,
     `Generating Question 1 on the `,
     `Generating Question 2 on the `,

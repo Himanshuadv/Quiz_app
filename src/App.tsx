@@ -30,6 +30,7 @@ const App: React.FC = () => {
           score={state.score}
           totalQuestions={state.questions.length}
           topic={state.topic!}
+          feedback={state.feedback!}
           // feedback={state.feedback}
         />
       )}

@@ -9,7 +9,7 @@ const QuizScreen: React.FC = () => {
 
   const currentQuestion = questions[currentIndex];
   const totalQuestions = questions.length;
-  const progress = ((currentIndex) / totalQuestions) * 100;
+  const progress = ((currentIndex+1) / totalQuestions) * 100;
 
   if (!currentQuestion) return <p>Loading question...</p>;
 

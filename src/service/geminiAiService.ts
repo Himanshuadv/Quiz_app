@@ -107,8 +107,8 @@ export const generateQuizQuestions = async (topic, amount = 5) => {
  * @param {string} topic - The quiz topic.
  * @returns {Promise<string>} - The personalized feedback message.
  */
-export const generateCustomFeedback = async (score, maxScore, topic) => {
-    const userPrompt = `The user scored ${score} out of ${maxScore} on a quiz about "${topic}". Write a single, encouraging, and highly personalized paragraph of feedback for the user. Do not explicitly restate the score, but reflect on the performance.`;
+export const generateCustomFeedback = async (score, maxScore, topic,questions) => {
+    const userPrompt = `The user scored ${score} out of ${maxScore} on a quiz about "${topic}" ${questions}. Write a single, encouraging, and highly personalized paragraph of feedback for the user. Do not explicitly restate the score, but reflect on the performance only one or two sentences. Then analysis the question and provide the topic these questions covers.`;
 
     const systemPrompt = "You are a motivational and informative quiz results analyst. Provide an encouraging feedback message in a single paragraph. The output MUST be a JSON object that strictly follows the provided schema.";
 
