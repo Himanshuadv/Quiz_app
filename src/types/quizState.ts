@@ -13,4 +13,5 @@ export type State = {
   feedback: string | null;
   loading: boolean;
   error: string | null;
+  result:boolean | false;
 };

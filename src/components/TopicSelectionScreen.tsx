@@ -22,7 +22,7 @@ const TopicSelectionScreen: React.FC = () => {
     setIsLoading(true)
     setLoadingTopic(topic);
     const questions = await generateQuizQuestions(topic); // fetchMCQs should accept topic param
-    console.log("Fetched questions:", questions);
+    // console.log("Fetched questions:", questions);
 
     if (!questions || questions.length === 0) {
       alert("No questions found for this topic");
@@ -43,7 +43,7 @@ const TopicSelectionScreen: React.FC = () => {
 
 
   return (
-    <CardWrapper extraClasses="h-[500px] flex flex-col justify-center">
+    <CardWrapper extraClasses="h-[540px] flex flex-col justify-center">
       <Sparkles className="w-12 h-12 mx-auto mb-4 text-purple-400" />
       <h1 className="text-4xl sm:text-5xl font-extrabold mb-8 uppercase text-center">
         AI-POWERED <br /> KNOWLEDGE QUIZ

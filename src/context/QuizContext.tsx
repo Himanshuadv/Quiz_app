@@ -13,10 +13,11 @@ export const initialState: State = {
   feedback: null, 
   loading: false, 
   error: null, 
+  result:false,
 };
 
 type Action =
-  | { type: "START_LOADING"; topic: string }
+  | { type: "START_LOADING"; topic: string,result:boolean }
   | { type: "SET_QUESTIONS"; questions: Question[] }
   | { type: "ANSWER_QUESTION"; id: string; answer: string }
   | { type: "FINISH_QUIZ" }
@@ -32,7 +33,7 @@ const QuizContext = createContext<any>(null);
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "START_LOADING":
-      return { ...state, view: "loading", topic: action.topic, loading: true };
+      return { ...state, view: "loading", topic: action.topic, loading: true, result:action.result };
     case "SET_QUESTIONS":
       return {
         ...state,

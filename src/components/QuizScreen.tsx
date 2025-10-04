@@ -20,9 +20,9 @@ const QuizScreen: React.FC = () => {
   };
 
   const handleNext = () => {
-    console.log(totalQuestions + "->"+ currentIndex
+    // console.log(totalQuestions + "->"+ currentIndex
       
-    );
+    // );
     
     if (currentIndex < totalQuestions - 1) {
       dispatch({ type: "NEXT_QUESTION" });

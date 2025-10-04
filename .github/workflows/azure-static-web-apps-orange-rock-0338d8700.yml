@@ -42,6 +42,7 @@ jobs:
            VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
            VITE_GEMINI_MODEL: ${{ secrets.VITE_GEMINI_MODEL }}
            VITE_GEMINI_URL: ${{ secrets.VITE_GEMINI_URL }}
+           VITE_OPEN_TB: ${{ secrets.VITE_OPEN_TB }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'

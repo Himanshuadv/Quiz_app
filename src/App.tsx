@@ -1,7 +1,7 @@
 // src/App.tsx
 import React , {useEffect} from "react";
 import { useQuiz } from "./context/QuizContext";
-import {fetchMCQs } from './service/openAiService'
+import {fetchMCQs } from './service/openTb'
 import AnalysisScreen from "./components/AnalysisScreen";
 
 import Layout from "./components/Layout";
@@ -17,7 +17,7 @@ const App: React.FC = () => {
   return (
     <Layout>
       {state.view === "topic" && <TopicSelectionScreen />}
-      {state.view === "loading" && <LoadingScreen topic={state.topic} />}
+      {state.view === "loading" && <LoadingScreen topic={state.topic} result = {state.result} />}
       {state.view === "quiz" && (
         <QuizScreen
           questions={state.questions}

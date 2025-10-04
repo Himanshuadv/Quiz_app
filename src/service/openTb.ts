@@ -5,7 +5,7 @@ export interface Question {
   options: string[];
   correctAnswer: string;
 }
-const API_KEY = "AIzaSyDPHPdnDKzWzBC2hxnseco25bkR11XlCh0"
+const API_KEY =  import.meta.env.VITE_OPEN_TB
 export interface Feedback {
   score: number;
   maxScore: number;
@@ -31,6 +31,8 @@ export async function fetchMCQs(topic?: string, amount: number = 5): Promise<Que
   }
 
   let data = await response.json();
+  // console.log(data);
+  
   if (data.response_code !== 0) {
     throw new Error('API returned no questions or error');
   }

@@ -2,7 +2,7 @@
 
 
 const apiKey = import.meta.env.VITE_API_KEY as string;
-import { fetchMCQs } from "./openAiService";
+import { fetchMCQs } from "./openTb";
 
 const QUESTION_SCHEMA = {
     type: "ARRAY",
@@ -62,7 +62,7 @@ export const generateQuizQuestions = async (topic, amount = 5) => {
     while (attempts < maxAttempts) {
         attempts++;
         try {
-            console.log(`Attempting to fetch questions (Attempt ${attempts})...`);
+            // console.log(`Attempting to fetch questions (Attempt ${attempts})...`);
             const response = await fetch(API_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -92,11 +92,12 @@ export const generateQuizQuestions = async (topic, amount = 5) => {
                 const delay = Math.pow(2, attempts) * 1000;
                 await new Promise(resolve => setTimeout(resolve, delay));
             } else {
+                return await fetchMCQs(topic, amount);
                 throw new Error("Failed to generate valid quiz questions after multiple retries.");
             }
         }
     }
-    return fetchMCQs()
+     
 };
 
 
