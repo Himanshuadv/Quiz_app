@@ -4,7 +4,6 @@ export interface Question {
   question: string;
   options: string[];
   correctAnswer: string;
-  userAnswer?: string;
   description?: string;
   id?: number | string;
 }
@@ -18,7 +17,11 @@ export interface QuizMeta {
   difficulty?: string;
 }
 
-export function generatePDF(meta: QuizMeta, questions: Question[]) {
+type Answers = {
+  [key: number]: string;
+};
+
+export function generatePDF(meta: QuizMeta, questions: Question[], answers: Answers) {
   const doc = new jsPDF({ unit: "pt", format: "a4" }); // A4: 595 x 842 pt
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
@@ -109,23 +112,23 @@ export function generatePDF(meta: QuizMeta, questions: Question[]) {
     lineHeight: number;
   };
 
-  const measureQuestionCard = (q: Question) => {
+  const measureQuestionCard = (q: Question, userAnswer: string | undefined) => {
     const maxW = CONTENT_WIDTH - CARD_PADDING_H * 2;
-    const questionTitle = `Q${(q.id ?? "") !== "" ? q.id : ""}${(q.id ?? "") !== "" ? ":" : ""} ${q.question}`;
+    const questionTitle = `Q${q.id ?? ""}${q.id ? ":" : ""} ${q.question}`;
     const qTitle = measureLinesHeight(questionTitle, maxW, 13, LINE_HEIGHT);
 
     const measuredOptions: MeasuredOption[] = q.options.map((opt, idx) => {
       const prefix = String.fromCharCode(65 + idx) + ". ";
       const base = `${prefix}${opt}`;
       const isCorrect = opt === q.correctAnswer;
-      const isChosenWrong = q.userAnswer !== q.correctAnswer && opt === q.userAnswer;
+      const isChosenWrong = userAnswer !== q.correctAnswer && opt === userAnswer;
       const lines = split(base, maxW - 24, 11);
       return { textLines: lines, isCorrect, isChosenWrong, lineHeight: SMALL_LINE };
     });
 
     const optionsHeight = measuredOptions.reduce((acc, m) => acc + m.textLines.length * SMALL_LINE, 0);
 
-    const ua = measureLinesHeight(`Your Answer: ${q.userAnswer ?? "Not Answered"}`, maxW, 11, SMALL_LINE);
+    const ua = measureLinesHeight(`Your Answer: ${userAnswer ?? "Not Answered"}`, maxW, 11, SMALL_LINE);
     const ca = measureLinesHeight(`Correct Answer: ${q.correctAnswer}`, maxW, 11, SMALL_LINE);
 
     const exp = q.description
@@ -140,11 +143,11 @@ export function generatePDF(meta: QuizMeta, questions: Question[]) {
     return { questionTitle, qTitle, measuredOptions, ua, ca, exp, totalHeight, maxW };
   };
 
-  const renderQuestionCard = (q: Question) => {
-    const m = measureQuestionCard(q);
+  const renderQuestionCard = (q: Question, userAnswer: string | undefined) => {
+    const m = measureQuestionCard(q, userAnswer);
     ensurePageSpace(m.totalHeight + CARD_GAP);
 
-    const gotItRight = q.userAnswer && q.userAnswer === q.correctAnswer;
+    const gotItRight = userAnswer && userAnswer === q.correctAnswer;
 
     const cardX = MARGIN;
     const cardY = cursorY;
@@ -181,7 +184,7 @@ export function generatePDF(meta: QuizMeta, questions: Question[]) {
 
     doc.setTextColor(30, 30, 30);
     doc.setFontSize(11);
-    doc.text(split(`Your Answer: ${q.userAnswer ?? "Not Answered"}`, m.maxW, 11), x, y);
+    doc.text(split(`Your Answer: ${userAnswer ?? "Not Answered"}`, m.maxW, 11), x, y);
     y += m.ua.height + 2;
 
     doc.setTextColor(20, 150, 80);
@@ -214,7 +217,10 @@ export function generatePDF(meta: QuizMeta, questions: Question[]) {
 
   // Build PDF
   addHeader();
-  questions.forEach((q, i) => renderQuestionCard({ ...q, id: i + 1 }));
+  questions.forEach((q, i) => {
+    const qid = typeof q.id === "number" ? q.id : i; // ensure numeric index
+    renderQuestionCard({ ...q, id: i + 1 }, answers[qid]);
+  });
   addFooterOnAllPages();
 
   const safeTopic = meta.topic.replace(/[^\w\-]+/g, "-");

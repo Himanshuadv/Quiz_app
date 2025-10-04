@@ -51,8 +51,9 @@ const ResultsScreen: React.FC<Props> = ({ score, totalQuestions, topic }) => {
       total: state.questions.length,
       date: currentDate,
     };
-
-    generatePDF(meta, state.questions);
+    
+    
+    generatePDF(meta, state.questions,state.answers);
   };
 
   return (

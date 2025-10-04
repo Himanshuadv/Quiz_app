@@ -15,6 +15,8 @@ const QuizScreen: React.FC = () => {
 
   const handleAnswerSelect = (option: string) => {
     
+   
+    
     
     dispatch({ type: "ANSWER_QUESTION", id: currentQuestion.id, answer: option });
   };

@@ -44,7 +44,8 @@ const reducer = (state: State, action: Action): State => {
     case "ANSWER_QUESTION": {
       // Update answers
       const updatedAnswers = { ...state.answers, [action.id]: action.answer };
-
+     
+      
       // Recalculate score by comparing each answered question's answer with correctAnswer
       let newScore = 0;
       for (const question of state.questions) {
