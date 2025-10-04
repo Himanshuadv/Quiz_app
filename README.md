@@ -1,6 +1,24 @@
 🧠 AI-Assisted Quiz App
 
 An interactive quiz experience powered by AI. Users select a topic, the app generates questions dynamically, and guides them through a smooth question-by-question flow with progress tracking and custom feedback.
+Project Screenshots:
+<img width="1039" height="727" alt="Screenshot 2025-10-04 at 11 39 22 PM" src="https://github.com/user-attachments/assets/8b27bfef-a7ea-4a31-8152-d86dea7349a4" />
+
+<img width="785" height="618" alt="Screenshot 2025-10-04 at 11 39 51 PM" src="https://github.com/user-attachments/assets/79378a87-281a-4fbb-897d-2c3e61c33553" />
+<img width="991" height="701" alt="Screenshot 2025-10-04 at 11 40 05 PM" src="https://github.com/user-attachments/assets/3ae3cb7d-f581-468a-abab-4a23085110a3" />
+
+<img width="1036" height="678" alt="Screenshot 2025-10-04 at 11 40 27 PM" src="https://github.com/user-attachments/assets/0125edb8-d520-4166-a704-27cd1010d6df" />
+<img width="832" height="659" alt="Screenshot 2025-10-04 at 11 40 39 PM" src="https://github.com/user-attachments/assets/f6a09ce1-474a-4c6b-87ae-38211a5638e3" />
+<img width="825" height="643" alt="Screenshot 2025-10-04 at 11 40 49 PM" src="https://github.com/user-attachments/assets/acbbd6a6-8678-4cc5-9d42-a069a769a53a" />
+
+Review Section:
+
+<img width="959" height="791" alt="Screenshot 2025-10-04 at 11 40 59 PM" src="https://github.com/user-attachments/assets/1a5d7c4c-a220-4fd8-a4db-917a93cf78ee" />
+
+<img width="964" height="812" alt="Screenshot 2025-10-04 at 11 41 24 PM" src="https://github.com/user-attachments/assets/74c64e45-9af0-440e-95ff-791774b9823e" />
+
+Quiz Report: Pdf formate
+<img width="885" height="688" alt="Screenshot 2025-10-04 at 11 41 47 PM" src="https://github.com/user-attachments/assets/94dcd772-767a-45cd-8b5e-1a19d9c43fed" />
 
 1. 🚀 Project Setup & Demo
 
@@ -14,7 +32,7 @@ npm run dev   # or npm start
 Demo
 
 - Web: https://orange-rock-0338d8700.1.azurestaticapps.net/
-- Provide a hosted link or screen recording here.
+- Video: https://drive.google.com/file/d/1M_ukLaNcaqM2nkEqCm8zDSa35qRKAves/view?usp=drive_link
 
 2.  📌 Problem Understanding
 
@@ -181,7 +199,7 @@ Technical Enhancements
 src/
  ├── components/   # Screens & UI components
  ├── context/      # Global QuizContext
- ├── service/      # AI + PDF generation
+ ├── service/      # AI + PDF generation, Logic for fallback opentdb api quiz generation.
  ├── types/        # TS types for quiz & state
  ├── App.tsx       # Entry point
  ├── main.tsx      # ReactDOM render
